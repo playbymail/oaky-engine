@@ -3,7 +3,10 @@
 
 package engine
 
-import "fmt"
+import (
+	"fmt"
+	"math"
+)
 
 // Vector is a two-dimensional vector
 type Vector struct {
@@ -19,6 +22,25 @@ func (v Vector) Add(w Vector) Vector {
 // (In other words, if they look the same when we print them out.)
 func (v Vector) Equals(w Vector) bool {
 	return v.String() == w.String()
+}
+
+// Length returns the magnitude of a vector
+func (v Vector) Length() float64 {
+	return v.Magnitude()
+}
+
+// Magnitude returns the magnitude of a vector.
+func (v Vector) Magnitude() float64 {
+	return math.Sqrt(v.X*v.X + v.Y*v.Y)
+}
+
+// Normalize returns a normalized vector.
+func (v Vector) Normalize() Vector {
+	magnitude := v.Magnitude()
+	if magnitude == 0.0 {
+		return Vector{}
+	}
+	return Vector{X: v.X / magnitude, Y: v.Y / magnitude}
 }
 
 // String implements the Stringer interface.
