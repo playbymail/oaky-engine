@@ -8,6 +8,13 @@ import (
 	"fmt"
 )
 
+// Certain qualities of the ship will affect sailing ability.
+// These include ballasting, the age of the ship, the skill of
+// the ship designers, hull construction, the qualities of the
+// rigging, the amount of weed and barnacles on the hull, and
+// so forth.
+//
+// These constants define the possible Ship Quality levels.
 const (
 	// HOOKER represents below-average quality build and setup.
 	HOOKER ShipQuality = -1
@@ -19,9 +26,7 @@ const (
 	SMART ShipQuality = 1
 )
 
-// ShipQuality is a measure of the craftsmanship and materials used
-// to build the ship, plus factors like the ballast, hull, rigging,
-// and even the ship's personal quirks.
+// ShipQuality is a measure of the ship's handling.
 type ShipQuality int
 
 // String implements the Stringer interface.
