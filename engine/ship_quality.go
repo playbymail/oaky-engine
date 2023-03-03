@@ -8,13 +8,21 @@ import (
 	"fmt"
 )
 
-type ShipQuality int
-
 const (
-	HOOKER  ShipQuality = -1
+	// HOOKER represents below-average quality build and setup.
+	HOOKER ShipQuality = -1
+
+	// AVERAGE represents an average quality build and setup.
 	AVERAGE ShipQuality = 0
-	SMART   ShipQuality = 1
+
+	// SMART represents an above average quality build and setup.
+	SMART ShipQuality = 1
 )
+
+// ShipQuality is a measure of the craftsmanship and materials used
+// to build the ship, plus factors like the ballast, hull, rigging,
+// and even the ship's personal quirks.
+type ShipQuality int
 
 // String implements the Stringer interface.
 func (sq ShipQuality) String() string {
@@ -50,6 +58,8 @@ func (sq *ShipQuality) UnmarshalJSON(b []byte) error {
 		*sq = AVERAGE
 	} else if bytes.Equal(b, []byte(`"SMART"`)) {
 		*sq = SMART
+	} else {
+		return fmt.Errorf("invalid ShipQuality")
 	}
-	return fmt.Errorf("invalid code")
+	return nil
 }
