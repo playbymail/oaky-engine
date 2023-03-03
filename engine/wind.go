@@ -11,6 +11,7 @@ import (
 // Strength of the wind affects sailing ability.
 // The stronger the wind, the faster the vessel will move; but a
 // very strong wind can destroy a ship if it sets too much sail.
+//
 // These constants define the possible Wind Strengths.
 const (
 	// Ship will not move unless it is moved under oars, or are being towed by boats.

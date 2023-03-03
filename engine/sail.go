@@ -13,6 +13,7 @@ import (
 // speed, the less maneuverable a ship becomes. At the higher
 // sail settings, a ship may zip past its Opponents and have to
 // spend many turns trying to work its way back into position.
+//
 // These constants define the possible Sail Settings.
 const (
 	// Ship will drift unless anchored.
@@ -100,4 +101,48 @@ func (s *SailSetting) UnmarshalJSON(b []byte) error {
 		return fmt.Errorf("invalid SailSetting")
 	}
 	return nil
+}
+
+// AddSail increases the amount of sail, if possible.
+// Ships may increase the amount of sail one level per turn.
+//
+// The updated value is returned.
+func (s SailSetting) AddSail() SailSetting {
+	switch s {
+	case NO_SAIL:
+		return MINIMUM_SAIL
+	case MINIMUM_SAIL:
+		return FIGHTING_SAIL
+	case FIGHTING_SAIL:
+		return ALL_PLAIN_SAIL
+	case ALL_PLAIN_SAIL:
+		return FULL_SAIL
+	case FULL_SAIL:
+		return EXTRA_SAIL
+	case EXTRA_SAIL:
+		return EXTRA_SAIL
+	}
+	panic(fmt.Sprintf("assert(SailSetting != %d)", s))
+}
+
+// ReduceSail decreases the amount of sail, if possible.
+// Ships may decrease the amount of sail one level per turn.
+//
+// The updated value is returned.
+func (s SailSetting) ReduceSail() SailSetting {
+	switch s {
+	case NO_SAIL:
+		return NO_SAIL
+	case MINIMUM_SAIL:
+		return NO_SAIL
+	case FIGHTING_SAIL:
+		return MINIMUM_SAIL
+	case ALL_PLAIN_SAIL:
+		return FIGHTING_SAIL
+	case FULL_SAIL:
+		return ALL_PLAIN_SAIL
+	case EXTRA_SAIL:
+		return FULL_SAIL
+	}
+	panic(fmt.Sprintf("assert(SailSetting != %d)", s))
 }
