@@ -44,26 +44,6 @@ func (a *Coordinates) UnmarshalJSON(b []byte) error {
 	return nil
 }
 
-// BearingFrom returns the bearing and range from the current location.
-// Angle is in radians.
-func (a Coordinates) BearingFrom(b Coordinates) (angle, distance float64) {
-	bearing := math.Atan2((a.X - b.X), (a.Y - b.Y))
-	for bearing < 0 {
-		bearing += 2 * math.Pi
-	}
-	return bearing, a.DistanceFrom(b)
-}
-
-// BearingTo returns the bearing and range to another location.
-// Angle is in radians.
-func (a Coordinates) BearingTo(b Coordinates) (angle, distance float64) {
-	bearing := math.Atan2((b.X - a.X), (b.Y - a.Y))
-	for bearing < 0 {
-		bearing += 2 * math.Pi
-	}
-	return bearing, a.DistanceFrom(b)
-}
-
 func (a Coordinates) DistanceFrom(b Coordinates) float64 {
 	dx, dy := (a.X - b.X), (a.Y - b.Y)
 	return math.Sqrt(dx*dx + dy*dy)
@@ -73,8 +53,3 @@ func (a Coordinates) DistanceTo(b Coordinates) float64 {
 	dx, dy := (a.X - b.X), (a.Y - b.Y)
 	return math.Sqrt(dx*dx + dy*dy)
 }
-
-// Bearing β = atan2(X,Y),
-//   For variable Y = sin(toRadians(lo2-lo1)) *  cos(toRadians(la2))
-//   and variable X = cos(toRadians(la1))*sin(toRadians(la2)) – sin(toRadians(la1))*cos(toRadians(la2))*cos(toRadians(lo2-lo1))
-//
