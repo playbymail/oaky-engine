@@ -53,6 +53,8 @@ I am using 64-bit floating point numbers for coordinates.
 According to [Stack Overflow](https://stackoverflow.com/questions/1848700/biggest-integer-that-can-be-stored-in-a-double), that means we should be able to track objects 9,007,199,254,740,992 millimeters apart.
 
 ## Bearing
+Bearing [reference](https://en.wikipedia.org/wiki/Bearing_(angle))
+
 Internally, we're using radians, but we convert to the Compass Rose when reporting bearing.
 
 I think that's kind of nice, because it hides the truth from the player.
@@ -79,6 +81,7 @@ the wind is from the SE at 7 knots,
 and the `El Gamo` is to the NE at (55,55),
 heading W at 8 knots.
 
+Nice [drawing](https://en.wikipedia.org/wiki/Bearing_(angle)#/media/File:Compass-rose-32-pt.svg).
 
 # Errata
 
@@ -106,3 +109,7 @@ See [Glossary of Nautical Terms](https://en.wikipedia.org/wiki/Glossary_of_nauti
 1. [Why Radian Measure Makes Life Easier In Mathematics And Physics](https://qedinsight.wordpress.com/2011/03/14/why-radian-measure-makes-life-easier-in-mathematics-and-physics/)
 1. [Compass Rose](https://en.wikipedia.org/wiki/Compass_rose)
 1. [Spherical Geometry](https://github.com/golang/geo)
+
+# Acknowledgments
+
+The Compass Rose (Compass-rose-32-pt) picture is [By JamesLucas - Own work, CC BY-SA 4.0](https://commons.wikimedia.org/w/index.php?curid=117908742).
