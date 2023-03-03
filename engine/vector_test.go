@@ -53,6 +53,23 @@ func TestVector_Normalize(t *testing.T) {
 	}
 }
 
+func TestVector_Rotate(t *testing.T) {
+	for _, tc := range []struct {
+		id      int
+		v       engine.Vector
+		degrees float64
+		rotated engine.Vector
+	}{
+		{1, engine.Vector{1, -2}, 60, engine.Vector{2.2321, -0.1340}},
+		{1, engine.Vector{2, 3}, 270, engine.Vector{3, -2}},
+	} {
+		rotated := tc.v.RotateDegrees(tc.degrees)
+		if rotated.String() != tc.rotated.String() {
+			t.Errorf("rotate: %d: want %s: got %s\n", tc.id, tc.rotated, rotated)
+		}
+	}
+}
+
 func TestVector_Scale(t *testing.T) {
 	for _, tc := range []struct {
 		id     int

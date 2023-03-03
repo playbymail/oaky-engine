@@ -43,7 +43,18 @@ func (v Vector) Normalize() Vector {
 	return Vector{X: v.X / magnitude, Y: v.Y / magnitude}
 }
 
-// Scale multiplies a vector by a scalar.
+// RotateDegrees returns a vector rotated anti-clockwise by β degrees
+func (v Vector) RotateDegrees(β float64) Vector {
+	return v.RotateRadians(β * math.Pi / 180.0)
+}
+
+// RotateRadians returns a vector rotated anti-clockwise by β radians
+func (v Vector) RotateRadians(β float64) Vector {
+	sinβ, cosβ := math.Sin(β), math.Cos(β)
+	return Vector{X: cosβ*v.X - sinβ*v.Y, Y: sinβ*v.X + cosβ*v.Y}
+}
+
+// Scale returns a vector multiplied by a scalar.
 func (v Vector) Scale(s float64) Vector {
 	return Vector{X: v.X * s, Y: v.Y * s}
 }
