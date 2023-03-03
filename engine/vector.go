@@ -43,6 +43,11 @@ func (v Vector) Normalize() Vector {
 	return Vector{X: v.X / magnitude, Y: v.Y / magnitude}
 }
 
+// Scale multiplies a vector by a scalar.
+func (v Vector) Scale(s float64) Vector {
+	return Vector{X: v.X * s, Y: v.Y * s}
+}
+
 // String implements the Stringer interface.
 func (v Vector) String() string {
 	return fmt.Sprintf("<%.4f %.4f>", v.X, v.Y)
