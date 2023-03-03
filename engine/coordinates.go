@@ -43,13 +43,3 @@ func (a *Coordinates) UnmarshalJSON(b []byte) error {
 	}
 	return nil
 }
-
-func (a Coordinates) DistanceFrom(b Coordinates) float64 {
-	dx, dy := (a.X - b.X), (a.Y - b.Y)
-	return math.Sqrt(dx*dx + dy*dy)
-}
-
-func (a Coordinates) DistanceTo(b Coordinates) float64 {
-	dx, dy := (a.X - b.X), (a.Y - b.Y)
-	return math.Sqrt(dx*dx + dy*dy)
-}
