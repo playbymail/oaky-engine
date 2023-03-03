@@ -8,6 +8,12 @@ import (
 	"fmt"
 )
 
+// The quality and quantity of sail that a ship sets affects
+// sailing ability. The more sail, the more speed; but the more
+// speed, the less maneuverable a ship becomes. At the higher
+// sail settings, a ship may zip past its Opponents and have to
+// spend many turns trying to work its way back into position.
+// These constants define the possible Sail Settings.
 const (
 	// Ship will drift unless anchored.
 	NO_SAIL SailSetting = iota
