@@ -19,6 +19,9 @@ func TestCoordinates_Bearing(t *testing.T) {
 	}
 	for n, tc := range []testCase{
 		{a: engine.Coordinates{}, b: engine.Coordinates{3, 2}, distance: "3.6056", degreesTo: "56.3099", degreesFrom: "236.3099"},
+		{a: engine.Coordinates{X: 3, Y: 2}, b: engine.Coordinates{}, distance: "3.6056", degreesTo: "236.3099", degreesFrom: "56.3099"},
+		{a: engine.Coordinates{}, b: engine.Coordinates{-14, 20}, distance: "24.4131", degreesTo: "325.0080", degreesFrom: "145.0080"},
+		{a: engine.Coordinates{X: -14, Y: 20}, b: engine.Coordinates{}, distance: "24.4131", degreesTo: "145.0080", degreesFrom: "325.0080"},
 	} {
 		a, b := tc.a, tc.b
 		bearing, distance := a.BearingTo(b)

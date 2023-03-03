@@ -109,6 +109,9 @@ See [Glossary of Nautical Terms](https://en.wikipedia.org/wiki/Glossary_of_nauti
 1. [Why Radian Measure Makes Life Easier In Mathematics And Physics](https://qedinsight.wordpress.com/2011/03/14/why-radian-measure-makes-life-easier-in-mathematics-and-physics/)
 1. [Compass Rose](https://en.wikipedia.org/wiki/Compass_rose)
 1. [Spherical Geometry](https://github.com/golang/geo)
+1. [Bearing Angle](https://www.youtube.com/watch?v=jVSwRDO0cq0) 
+1. [Bearing Angle - Boat](https://www.youtube.com/watch?v=lxVaQGTGxxU)
+1. 1. [Length and Bearing](https://www.youtube.com/watch?v=V1JeNm5c8xc)
 
 # Acknowledgments
 
