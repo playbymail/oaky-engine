@@ -17,29 +17,33 @@ import (
 // These constants define the possible Sail Settings.
 const (
 	// Ship will drift unless anchored.
-	NO_SAIL SailSetting = iota
+	NO_SAIL SailSetting = 0
 
 	// Generally headsails and driver.
 	// Barely enough sail to give the ship headway,
 	// allow the rudder to bite, and allow for fine maneuvering.
-	MINIMUM_SAIL
+	MINIMUM_SAIL = 1
 
 	// Generally reefed topsails.
 	// A good setting for battle, as it provides a stable
 	// gunnery platform and allows for fine maneuvering.
-	FIGHTING_SAIL
+	FIGHTING_SAIL = 2
 
 	// Generally mainsails and topsails. Easy to manage.
-	ALL_PLAIN_SAIL
+	ALL_PLAIN_SAIL = 3
 
 	// Topgallants and royals.
 	// Fast, difficult to manage, lacks easy maneuverability.
-	FULL_SAIL
+	FULL_SAIL = 4
 
 	// Courses, studding sails, gaffsails, staysails, and
 	// other weird creations of the sailmaker's art.
 	// Hard to handle, very fast, with very little maneuverability.
-	EXTRA_SAIL
+	EXTRA_SAIL = 5
+
+	// sizeofSailSetting is used for sizing arrays.
+	// It must be the last value defined for the enums.
+	sizeofSailSetting = EXTRA_SAIL + 1
 )
 
 // SailSetting represents the quantity and quality of sails set.

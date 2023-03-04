@@ -50,39 +50,74 @@ const (
 	BEATING_P7                 = 7  // Beating, 7 points to port.
 	BEATING_S7                 = -7 // Beating, 7 points to starboard.
 	WIND_AHEAD                 = 8  // The wind is DIRECTLY ahead.
+)
 
+type WindBearing int
+
+const (
+	WB_ASTERN        WindBearing = 0
+	WB_QUARTER_REACH             = 1
+	WB_BROAD_REACH               = 2
+	WB_BEATING                   = 3
+
+	// sizeofWindBearing is used for sizing arrays.
+	// It must be one more than the largest enum value.
+	sizeofWindBearing = WB_BEATING + 1
+)
+
+func (wb WindBearing) String() string {
+	switch wb {
+	case WB_ASTERN:
+		return "ASTERN"
+	case WB_QUARTER_REACH:
+		return "QUARTER_REACH"
+	case WB_BROAD_REACH:
+		return "BROAD_REACH"
+	case WB_BEATING:
+		return "BEATING"
+	}
+	panic(fmt.Sprintf("assert(WindBearing != %d)", wb))
+}
+
+const (
 	// Strength of the wind affects sailing ability.
 	// The stronger the wind, the faster the vessel will move; but a
 	// very strong wind can destroy a ship if it sets too much sail.
 	//
 	// These constants define the possible Wind Strengths.
 
+	NO_WIND WindSpeed = 0
+
 	// Ship will not move unless it is moved under oars, or are being towed by boats.
-	CALM WindSpeed = iota
+	CALM = 1
 
 	// Ship may "catch a wind" and move, while others will have to row, or be towed by boats.
-	LIGHT_GUSTS
+	LIGHT_GUSTS = 2
 
 	// Light wind.
-	LIGHT_WIND
+	LIGHT_WIND = 3
 
 	// Normal breeze.
-	NORMAL_BREEZE
+	NORMAL_BREEZE = 4
 
 	// Ship may not use Sail Setting EXTRA_SAIL without losing masts.
-	HEAVY_BREEZE
+	HEAVY_BREEZE = 5
 
 	// Ship may not use Sail Setting FULL_SAIL or higher without losing masts.
 	// Lower gunports may be awash.
-	GALE
+	GALE = 6
 
 	// Ship may not use Sail Setting ALL_PLAIN_SAIL or higher without losing masts.
 	// Lower gunports may be awash.
-	STORM
+	STORM = 7
 
 	// Ship may not use Sail Setting FIGHTING_SAIL or higher without losing masts.
 	// No combat is allowed.
-	HURRICANE
+	HURRICANE = 8
+
+	// sizeofWindSpeed is used for sizing arrays.
+	// It must be one more than the largest enum value.
+	sizeofWindSpeed = HURRICANE + 1
 )
 
 // WindAngle is number of compass points the stern is from the wind.
