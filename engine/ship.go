@@ -4,54 +4,40 @@
 package engine
 
 type Ship struct {
-	Name        string
-	Quality     ShipQuality
-	Coordinates Coordinates
+	Name         string
+	Rate         ShipRate
+	SailingChart *SailingChart
+	Quality      ShipQuality
+	Coordinates  Coordinates
+	Heading      float64 // radians, clockwise, 0 is North
+	SailSetting  SailSetting
 }
 
-// See https://en.wikipedia.org/wiki/Rating_system_of_the_Royal_Navy
-type ShipRate int
+var sailingCharts []*SailingChart
 
-const (
-	NOT_RATED ShipRate = iota
-	SHIPS_BOAT
+func (s *Ship) IncreaseSail() bool {
+	if tmp := s.SailSetting.AddSail(); tmp != s.SailSetting {
+		s.SailSetting = tmp
+		return true
+	}
+	return false
+}
 
-	// CUTTER is single masted vessel.
-	// See https://en.wikipedia.org/wiki/Cutter_(boat)
-	CUTTER
+func (s *Ship) SetSailingChart() bool {
+	if sailingCharts == nil {
+		allSailingCharts := newSailingCharts()
+		for n := range allSailingCharts {
+			sailingCharts = append(sailingCharts, &allSailingCharts[n])
+		}
+	}
 
-	// LUGGER is 2 or 3 masted vessel with lug sails.
-	// Used for smuggling and piracy.
-	// See https://en.wikipedia.org/wiki/Lugger
-	LUGGER
-
-	// See https://en.wikipedia.org/wiki/Xebec
-	XEBEC
-
-	// BOMB is a ketch with two masts.
-	// See https://en.wikipedia.org/wiki/Bomb_vessel
-	BOMB_VESSEL
-
-	// BRIG is 2 masted vessel.
-	// Seehttps://en.wikipedia.org/wiki/Brig
-	BRIG
-
-	// See https://en.wikipedia.org/wiki/Sloop-of-war
-	SLOOP
-
-	// CORVETTE is larger than a sloop.
-	// See https://en.wikipedia.org/wiki/Corvette
-	CORVETTE
-
-	FRIGATE_6TH_RATE
-	FRIGATE_5TH_RATE
-	FRIGATE_4TH_RATE
-	SOL_4TH_RATE
-	SOL_3RD_RATE
-	SOL_2ND_RATE
-	SOL_1ST_RATE
-
-	// sizeofShipRate is used for sizing arrays.
-	// It must be the last value defined for the enums.
-	SizeofShipRate
-)
+	for _, chart := range sailingCharts {
+		for _, rate := range chart.Rates {
+			if rate == s.Rate {
+				s.SailingChart = chart
+				return true
+			}
+		}
+	}
+	return false
+}
