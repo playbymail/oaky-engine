@@ -1,6 +1,6 @@
 {
   "SAILING_CHART_I": {
-    "rates": ["SOL_1ST_RATE", "SOL_2ND_RATE", "SOL_3RD_RATE", "SOL_4TH_RATE"],
+    "RATES": ["SOL_1ST_RATE", "SOL_2ND_RATE", "SOL_3RD_RATE", "SOL_4TH_RATE"],
     "WIND_ASTERN": {
       "MINIMUM_SAIL":    {"LIGHT_WIND": [12,16, 20], "NORMAL_BREEZE": [18, 24, 30], "HEAVY_BREEZE": [ 27, 36, 45    ], "GALE": [ 57, 76, 95    ], "STORM": [  63,84,105    ], "HURRICANE": [69,92,115,999]},
       "FIGHTING_SAIL":   {"LIGHT_WIND": [18,24, 30], "NORMAL_BREEZE": [27, 36, 45], "HEAVY_BREEZE": [ 48, 64, 80    ], "GALE": [ 69, 92,115    ], "STORM": [ 75,100,125,999]},
@@ -31,7 +31,7 @@
     }
   },
   "SAILING_CHART_II": {
-    "rates": ["FRIGATE_4TH_RATE"],
+    "RATES": ["FRIGATE_4TH_RATE"],
     "WIND_ASTERN": {
       "MINIMUM_SAIL":  {"LIGHT_WIND": [18, 24, 30], "NORMAL_BREEZE": [ 27, 36, 45], "HEAVY_BREEZE": [ 33, 44, 55    ], "GALE": [51, 68, 85    ], "STORM": [63, 84,105    ], "HURRICANE": [69,92,115,999]},
       "FIGHTING_SAIL": {"LIGHT_WIND": [27, 36, 45], "NORMAL_BREEZE": [ 36, 48, 60], "HEAVY_BREEZE": [ 48, 64, 80    ], "GALE": [60, 80,100    ], "STORM": [75,100,125,999]},
@@ -62,7 +62,7 @@
     }
   },
   "SAILING_CHART_III": {
-    "rates": ["FRIGATE_5TH_RATE", "FRIGATE_6TH_RATE", "LUGGER", "XEBEC", "CUTTER", "CORVETTE"],
+    "RATES": ["FRIGATE_5TH_RATE", "FRIGATE_6TH_RATE", "LUGGER", "XEBEC", "CUTTER", "CORVETTE"],
     "WIND_ASTERN": {
       "MINIMUM_SAIL":  {"LIGHT_WIND": [24,32,40   ], "NORMAL_BREEZE": [33,44,55   ], "HEAVY_BREAZE": [51,68,85       ], "GALE": [57,76,95       ], "STORM": [51,68,85       ], "HURRICANE": [57,76,95,999]},
       "FIGHTING_SAIL": {"LIGHT_WIND": [33,44,55   ], "NORMAL_BREEZE": [42,56,70   ], "HEAVY_BREAZE": [56,72,90       ], "GALE": [69,92,115      ], "STORM": [57,76,95,999   ]},
@@ -93,7 +93,7 @@
     }
   },
   "SAILING_CHART_IV": {
-    "rates": ["BRIG", "SLOOP", "BOMB"],
+    "RATES": ["BRIG", "SLOOP", "BOMB_VESSEL"],
     "WIND_ASTERN": {
       "MINIMUM_SAIL":  {"LIGHT_WIND": [ 8,12,16], "NORMAL_BREEZE": [15,20,25 ], "HEAVY_BREEZE": [21,28,35       ], "GALE": [27,36,45     ], "STORM": [33,44,55    ], "HURRICANE": [51,68,85,999]},
       "FIGHTING_SAIL": {"LIGHT_WIND": [12,16,20], "NORMAL_BREEZE": [21,28,35 ], "HEAVY_BREEZE": [27,36,45       ], "GALE": [33,44,55     ], "STORM": [51,68,85,999]},
@@ -124,7 +124,7 @@
     }
   },
   "SAILING_CHART_V": {
-    "rates": ["SHIPS_BOAT"],
+    "RATES": ["SHIPS_BOAT"],
     "WIND_ASTERN": {
       "MINIMUM_SAIL":  {"LIGHT_WIND": [ 8,12,16], "NORMAL_BREEZE": [15,20,25 ], "HEAVY_BREEZE": [21,28,35       ], "GALE": [27,36,45     ], "STORM": [33,44,55    ], "HURRICANE": [51,68,85,999]},
       "FIGHTING_SAIL": {"LIGHT_WIND": [12,16,20], "NORMAL_BREEZE": [21,28,35 ], "HEAVY_BREEZE": [27,36,45       ], "GALE": [33,44,55     ], "STORM": [51,68,85,999]}

@@ -7,7 +7,8 @@ import "github.com/playbymail/oaky-engine/engine"
 
 type Chart struct {
 	Name                 string
-	WindBearingSpeedSail [engine.WB_BEATING + 1][engine.HURRICANE + 1][engine.EXTRA_SAIL + 1]SailingSpeed
+	Rates                []string
+	WindBearingSpeedSail [engine.HURRICANE + 1][engine.EXTRA_SAIL + 1][engine.WB_BEATING + 1]SailingSpeed
 }
 
 type SailingSpeed struct {
@@ -25,7 +26,7 @@ type SailingChartTables struct {
 }
 
 type ChartWindBearing struct {
-	Rates            []string          `json:"rates"`
+	RATES            []string          `json:"RATES"`
 	WB_ASTERN        *ChartSailSetting `json:"WIND_ASTERN"`
 	WB_QUARTER_REACH *ChartSailSetting `json:"QUARTER_REACH"`
 	WB_BROAD_REACH   *ChartSailSetting `json:"BROAD_REACH"`
