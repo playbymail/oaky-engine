@@ -15,11 +15,19 @@ import (
 // EAST and WEST are on the X axis.
 // EAST is a positive X value, WEST is negative.
 
-// Coordinates are x and y (internally).
+// Coordinates are immutable Cartesian coordinates.
 // At some point, we'll output them as longitude and latitude.
 type Coordinates struct {
 	X float64
 	Y float64
+}
+
+func (c Coordinates) Add(vectors ...Vector) Coordinates {
+	x, y := c.X, c.Y
+	for _, v := range vectors {
+		x, y = x+v.X, y+v.Y
+	}
+	return Coordinates{X: x, Y: y}
 }
 
 // String implements the Stringer interface {
