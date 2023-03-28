@@ -3,12 +3,15 @@
 
 package main
 
-import "github.com/playbymail/oaky-engine/engine"
+import (
+	"github.com/playbymail/oaky-engine/engine"
+	"github.com/playbymail/oaky-engine/engine/wind"
+)
 
 type Chart struct {
 	Name                 string
 	Rates                []string
-	WindBearingSpeedSail [engine.HURRICANE + 1][engine.EXTRA_SAIL + 1][engine.WB_BEATING + 1]SailingSpeed
+	WindBearingSpeedSail [wind.HURRICANE + 1][engine.EXTRA_SAIL + 1][wind.WB_BEATING + 1]SailingSpeed
 }
 
 type SailingSpeed struct {

@@ -10,6 +10,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/playbymail/oaky-engine/engine"
+	"github.com/playbymail/oaky-engine/engine/wind"
 	"log"
 	"os"
 )
@@ -47,13 +48,13 @@ func main() {
 		}
 
 		for _, a := range []struct {
-			wind_bearing engine.WindBearing
+			wind_bearing wind.WindBearing
 			data         *ChartSailSetting
 		}{
-			{engine.WB_ASTERN, sc.WB_ASTERN},
-			{engine.WB_QUARTER_REACH, sc.WB_QUARTER_REACH},
-			{engine.WB_BROAD_REACH, sc.WB_BROAD_REACH},
-			{engine.WB_BEATING, sc.WB_BEATING},
+			{wind.WB_ASTERN, sc.WB_ASTERN},
+			{wind.WB_QUARTER_REACH, sc.WB_QUARTER_REACH},
+			{wind.WB_BROAD_REACH, sc.WB_BROAD_REACH},
+			{wind.WB_BEATING, sc.WB_BEATING},
 		} {
 			if a.data != nil {
 				for _, b := range []struct {
@@ -68,15 +69,15 @@ func main() {
 				} {
 					if b.data != nil {
 						for _, c := range []struct {
-							wind_speed engine.WindSpeed
+							wind_speed wind.WindSpeed
 							data       [4]int
 						}{
-							{engine.LIGHT_WIND, b.data.LIGHT_WIND},
-							{engine.NORMAL_BREEZE, b.data.NORMAL_BREEZE},
-							{engine.HEAVY_BREEZE, b.data.HEAVY_BREEZE},
-							{engine.GALE, b.data.GALE},
-							{engine.STORM, b.data.STORM},
-							{engine.HURRICANE, b.data.HURRICANE},
+							{wind.LIGHT_WIND, b.data.LIGHT_WIND},
+							{wind.NORMAL_BREEZE, b.data.NORMAL_BREEZE},
+							{wind.HEAVY_BREEZE, b.data.HEAVY_BREEZE},
+							{wind.GALE, b.data.GALE},
+							{wind.STORM, b.data.STORM},
+							{wind.HURRICANE, b.data.HURRICANE},
 						} {
 							chart.WindBearingSpeedSail[c.wind_speed][b.sail_setting][a.wind_bearing] = SailingSpeed{
 								Allowed: c.data[1] != 0,
@@ -127,9 +128,9 @@ func main() {
 		}
 		_, _ = fmt.Fprintf(bb, "}\n")
 
-		for wind_speed := engine.LIGHT_WIND; wind_speed <= engine.HURRICANE; wind_speed++ {
+		for wind_speed := wind.LIGHT_WIND; wind_speed <= wind.HURRICANE; wind_speed++ {
 			for sail_setting := engine.NO_SAIL; sail_setting <= engine.EXTRA_SAIL; sail_setting++ {
-				for wind_bearing := engine.WB_ASTERN; wind_bearing <= engine.WB_BEATING; wind_bearing++ {
+				for wind_bearing := wind.WB_ASTERN; wind_bearing <= wind.WB_BEATING; wind_bearing++ {
 					if chart.WindBearingSpeedSail[wind_speed][sail_setting][wind_bearing].Speed == 0 {
 						continue
 					} else if !chart.WindBearingSpeedSail[wind_speed][sail_setting][wind_bearing].Allowed {
@@ -137,20 +138,20 @@ func main() {
 					}
 					_, _ = fmt.Fprintf(bb, "\tchart[%-17s].WindSpeed[engine.%-14s].SailSetting[engine.%-14s].Allowed = true\n",
 						sc,
-						engine.WindSpeed(wind_speed).String(),
+						wind.WindSpeed(wind_speed).String(),
 						engine.SailSetting(sail_setting).String())
 					_, _ = fmt.Fprintf(bb, "\tchart[%-17s].WindSpeed[engine.%-14s].SailSetting[engine.%-14s].WindBearing[engine.WB_%-14s].Speed = %3d\n",
 						sc,
-						engine.WindSpeed(wind_speed).String(),
+						wind.WindSpeed(wind_speed).String(),
 						engine.SailSetting(sail_setting).String(),
-						engine.WindBearing(wind_bearing).String(),
+						wind.WindBearing(wind_bearing).String(),
 						chart.WindBearingSpeedSail[wind_speed][sail_setting][wind_bearing].Speed)
 					if chart.WindBearingSpeedSail[wind_speed][sail_setting][wind_bearing].Splat {
 						_, _ = fmt.Fprintf(bb, "\tchart[%-17s].WindSpeed[engine.%-14s].SailSetting[engine.%-14s].WindBearing[engine.WB_%-14s].Splat = true\n",
 							sc,
-							engine.WindSpeed(wind_speed).String(),
+							wind.WindSpeed(wind_speed).String(),
 							engine.SailSetting(sail_setting).String(),
-							engine.WindBearing(wind_bearing).String())
+							wind.WindBearing(wind_bearing).String())
 					}
 				}
 			}

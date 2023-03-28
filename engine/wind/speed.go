@@ -1,9 +1,9 @@
 // oaky-engine: a game engine for Walter Jon William's "Heart of Oak"
 // Copyright (c) 2023 Michael D Henderson. All rights reserved.
 
-package engine
+package wind
 
-// WindSpeed is sometimes called "WindStrength" in the rule book.
+// Speed is sometimes called "WindStrength" in the rule book.
 
 import (
 	"bytes"
@@ -17,7 +17,7 @@ const (
 	//
 	// These constants define the possible Wind Strengths.
 
-	NO_WIND WindSpeed = 0
+	NO_WIND Speed = 0
 
 	// Ship will not move unless it is moved under oars, or are being towed by boats.
 	CALM = 1
@@ -45,17 +45,17 @@ const (
 	// Ship may not use Sail Setting FIGHTING_SAIL or higher without losing masts.
 	// No combat is allowed.
 	HURRICANE = 8
-
-	// sizeofWindSpeed is used for sizing arrays.
-	// It must be one more than the largest enum value.
-	sizeofWindSpeed = HURRICANE + 1
 )
 
-// WindSpeed is a measure of the current speed of the wind.
-type WindSpeed int
+// MAX_SPEED returns the largest value for Speed.
+// It is meant to be used for sizing arrays.
+const MAX_SPEED = HURRICANE
+
+// Speed is a measure of the current speed of the wind.
+type Speed int
 
 // String implements the Stringer interface.
-func (w WindSpeed) String() string {
+func (w Speed) String() string {
 	switch w {
 	case CALM:
 		return "CALM"
@@ -74,11 +74,11 @@ func (w WindSpeed) String() string {
 	case HURRICANE:
 		return "HURRICANE"
 	}
-	panic(fmt.Sprintf("assert(WindSpeed != %d)", w))
+	panic(fmt.Sprintf("assert(Speed != %d)", w))
 }
 
 // MarshalJSON implements the json.Marshaler interface.
-func (w WindSpeed) MarshalJSON() ([]byte, error) {
+func (w Speed) MarshalJSON() ([]byte, error) {
 	switch w {
 	case CALM:
 		return []byte("CALM"), nil
@@ -97,11 +97,11 @@ func (w WindSpeed) MarshalJSON() ([]byte, error) {
 	case HURRICANE:
 		return []byte("HURRICANE"), nil
 	}
-	return nil, fmt.Errorf("invalid WindSpeed")
+	return nil, fmt.Errorf("invalid Speed")
 }
 
 // UnmarshalJSON implements the json.Unmarshaler interface.
-func (w *WindSpeed) UnmarshalJSON(b []byte) error {
+func (w *Speed) UnmarshalJSON(b []byte) error {
 	if bytes.Equal(b, []byte(`"CALM"`)) {
 		*w = CALM
 	} else if bytes.Equal(b, []byte(`"LIGHT_GUSTS"`)) {
@@ -119,7 +119,7 @@ func (w *WindSpeed) UnmarshalJSON(b []byte) error {
 	} else if bytes.Equal(b, []byte(`"HURRICANE"`)) {
 		*w = HURRICANE
 	} else {
-		return fmt.Errorf("invalid WindSpeed")
+		return fmt.Errorf("invalid Speed")
 	}
 	return nil
 }

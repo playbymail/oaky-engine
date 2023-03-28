@@ -1,9 +1,9 @@
 // oaky-engine: a game engine for Walter Jon William's "Heart of Oak"
 // Copyright (c) 2023 Michael D Henderson. All rights reserved.
 
-package engine
+package sail
 
-// SailSetting is sometimes called "SailCondition" in the rule book.
+// Setting is sometimes called "SailCondition" in the rule book.
 
 import (
 	"bytes"
@@ -19,7 +19,7 @@ import (
 // These constants define the possible Sail Settings.
 const (
 	// Ship will drift unless anchored.
-	NO_SAIL SailSetting = 0
+	NO_SAIL Setting = 0
 
 	// Generally headsails and driver.
 	// Barely enough sail to give the ship headway,
@@ -42,17 +42,17 @@ const (
 	// other weird creations of the sailmaker's art.
 	// Hard to handle, very fast, with very little maneuverability.
 	EXTRA_SAIL = 5
-
-	// sizeofSailSetting is used for sizing arrays.
-	// It must be the last value defined for the enums.
-	sizeofSailSetting = EXTRA_SAIL + 1
 )
 
-// SailSetting represents the quantity and quality of sails set.
-type SailSetting int
+// MAX_SETTING is the largest value used for Setting.
+// It is meant to be used for sizing arrays.
+const MAX_SETTING = EXTRA_SAIL
+
+// Setting represents the quantity and quality of sails set.
+type Setting int
 
 // String implements the Stringer interface.
-func (s SailSetting) String() string {
+func (s Setting) String() string {
 	switch s {
 	case NO_SAIL:
 		return "NO_SAIL"
@@ -67,11 +67,11 @@ func (s SailSetting) String() string {
 	case EXTRA_SAIL:
 		return "EXTRA_SAIL"
 	}
-	panic(fmt.Sprintf("assert(SailSetting != %d)", s))
+	panic(fmt.Sprintf("assert(Setting != %d)", s))
 }
 
 // MarshalJSON implements the json.Marshaler interface.
-func (s SailSetting) MarshalJSON() ([]byte, error) {
+func (s Setting) MarshalJSON() ([]byte, error) {
 	switch s {
 	case NO_SAIL:
 		return []byte("NO_SAIL"), nil
@@ -86,11 +86,11 @@ func (s SailSetting) MarshalJSON() ([]byte, error) {
 	case EXTRA_SAIL:
 		return []byte("EXTRA_SAIL"), nil
 	}
-	return nil, fmt.Errorf("invalid SailSetting")
+	return nil, fmt.Errorf("invalid Setting")
 }
 
 // UnmarshalJSON implements the json.Unmarshaler interface.
-func (s *SailSetting) UnmarshalJSON(b []byte) error {
+func (s *Setting) UnmarshalJSON(b []byte) error {
 	if bytes.Equal(b, []byte(`"NO_SAIL"`)) {
 		*s = NO_SAIL
 	} else if bytes.Equal(b, []byte(`"MINIMUM_SAIL"`)) {
@@ -104,7 +104,7 @@ func (s *SailSetting) UnmarshalJSON(b []byte) error {
 	} else if bytes.Equal(b, []byte(`"EXTRA_SAIL"`)) {
 		*s = EXTRA_SAIL
 	} else {
-		return fmt.Errorf("invalid SailSetting")
+		return fmt.Errorf("invalid Setting")
 	}
 	return nil
 }
@@ -113,7 +113,7 @@ func (s *SailSetting) UnmarshalJSON(b []byte) error {
 // Ships may increase the amount of sail one level per turn.
 //
 // The updated value is returned.
-func (s SailSetting) AddSail() SailSetting {
+func (s Setting) AddSail() Setting {
 	switch s {
 	case NO_SAIL:
 		return MINIMUM_SAIL
@@ -128,14 +128,14 @@ func (s SailSetting) AddSail() SailSetting {
 	case EXTRA_SAIL:
 		return EXTRA_SAIL
 	}
-	panic(fmt.Sprintf("assert(SailSetting != %d)", s))
+	panic(fmt.Sprintf("assert(Setting != %d)", s))
 }
 
 // ReduceSail decreases the amount of sail, if possible.
 // Ships may decrease the amount of sail one level per turn.
 //
 // The updated value is returned.
-func (s SailSetting) ReduceSail() SailSetting {
+func (s Setting) ReduceSail() Setting {
 	switch s {
 	case NO_SAIL:
 		return NO_SAIL
@@ -150,5 +150,5 @@ func (s SailSetting) ReduceSail() SailSetting {
 	case EXTRA_SAIL:
 		return FULL_SAIL
 	}
-	panic(fmt.Sprintf("assert(SailSetting != %d)", s))
+	panic(fmt.Sprintf("assert(Setting != %d)", s))
 }
